@@ -24,6 +24,12 @@ a {
 
 .nav-items a {
   margin-left: 40px;
+  padding-bottom: 20px;
+}
+
+.link-active {
+  color: #5ECE7B;
+  border-bottom: 2px solid #5ECE7B;
 }
 
 .logo {

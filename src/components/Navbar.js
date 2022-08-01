@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink, Link } from "react-router-dom";
 import Logo from "../images/a-logo.svg";
 import Dollar from "../images/dollar-sign.svg";
 import Cart from "../images/cart.svg";
@@ -9,9 +10,9 @@ export default class Navbar extends Component {
     return (
       <nav className="nav-bar">
         <div className="nav-items">
-          <a href="/">Women</a>
-          <a href="/">Men</a>
-          <a href="/">Kids</a>
+          <NavLink to="/" className={({ isActive }) => (isActive ? "link-active" : "a")}>Women</NavLink>
+          <NavLink to="/men" className={({ isActive }) => (isActive ? "link-active" : "a")}>Men</NavLink>
+          <NavLink to="/kids" className={({ isActive }) => (isActive ? "link-active" : "a")}>Kids</NavLink>
         </div>
         <div className="logo">
           <img src={Logo} alt="logo" width="41px" height="41px" />
@@ -78,9 +79,9 @@ export default class Navbar extends Component {
                 <b className="margin-r">Total</b>
                 <b>$200.00</b>
                 <div>
-                  <a href="/cart">
+                  <Link to="/cart">
                     <button className="bag-btn">View Bag</button>
-                  </a>
+                  </Link>
                   <button
                     className="cart-btn"
                     style={{

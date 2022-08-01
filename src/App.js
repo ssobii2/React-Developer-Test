@@ -9,16 +9,16 @@ import Products from "./components/Products";
 class App extends Component {
   render() {
     return (
-      <div className="app">
-        <Navbar />
-        <Router>
+      <Router>
+        <div className="app">
+          <Navbar />
           <Routes>
             <Route path="/" element={<Category />} />
             <Route path="/product" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
           </Routes>
-        </Router>
-      </div>
+        </div>
+      </Router>
     );
   }
 }
