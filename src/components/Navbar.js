@@ -1,39 +1,99 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import Logo from "../images/a-logo.svg";
 import Dollar from "../images/dollar-sign.svg";
 import Cart from "../images/cart.svg";
 import ProductImg from "../images/product.svg";
 
 export default class Navbar extends Component {
+  container = React.createRef();
+
+  handleClick = () => {
+    this.setState((state) => {
+      return {
+        open: !state.open,
+      };
+    });
+  };
+
+  handleClickOutside = (event) => {
+    if (
+      this.container.current &&
+      !this.container.current.contains(event.target)
+    ) {
+      this.setState({
+        open: false,
+      });
+    }
+  };
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+    };
+  }
+
   render() {
     return (
-      <nav className="nav-bar">
+      <nav className="nav-bar" ref={this.container}>
         <div className="nav-items">
-          <NavLink to="/" className={({ isActive }) => (isActive ? "link-active" : "a")}>Women</NavLink>
-          <NavLink to="/men" className={({ isActive }) => (isActive ? "link-active" : "a")}>Men</NavLink>
-          <NavLink to="/kids" className={({ isActive }) => (isActive ? "link-active" : "a")}>Kids</NavLink>
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? "link-active" : "a")}
+          >
+            Women
+          </NavLink>
+          <NavLink
+            to="/men"
+            className={({ isActive }) => (isActive ? "link-active" : "a")}
+          >
+            Men
+          </NavLink>
+          <NavLink
+            to="/kids"
+            className={({ isActive }) => (isActive ? "link-active" : "a")}
+          >
+            Kids
+          </NavLink>
         </div>
         <div className="logo">
           <img src={Logo} alt="logo" width="41px" height="41px" />
         </div>
         <div className="actions">
           <div className="dropdown">
-            <img src={Dollar} alt="dollar" />
-            <div className="dropdown-content">
-              <a href="/">
-                <img src={Dollar} alt="dollar" />
-                USD
-              </a>
-              <a href="/">
-                <img src={Dollar} alt="dollar" />
-                EUR
-              </a>
-              <a href="/">
-                <img src={Dollar} alt="dollar" />
-                JPY
-              </a>
+            <div className="dropdown-button">
+              <img src={Dollar} alt="dollar" onClick={this.handleClick} />
+              {this.state.open ? (
+                <FaAngleUp onClick={this.handleClick} />
+              ) : (
+                <FaAngleDown onClick={this.handleClick} />
+              )}
             </div>
+            {this.state.open && (
+              <div className="dropdown-content">
+                <a href="/">
+                  <img src={Dollar} alt="dollar" />
+                  USD
+                </a>
+                <a href="/">
+                  <img src={Dollar} alt="dollar" />
+                  EUR
+                </a>
+                <a href="/">
+                  <img src={Dollar} alt="dollar" />
+                  JPY
+                </a>
+              </div>
+            )}
           </div>
 
           <div className="dropdown-2">
