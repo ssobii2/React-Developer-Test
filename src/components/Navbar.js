@@ -37,9 +37,8 @@ export default class Navbar extends Component {
 
           <div className="dropdown-2">
             <div id="overlay"></div>
-            <a className="cart" href="/cart">
-              <img src={Cart} alt="cart" />
-            </a>
+            <img className="cart" src={Cart} alt="cart" />
+            <div className="badge">3</div>
             <div className="dropdown-content-2">
               <p className="margin-p">
                 <b>My Bag</b>,3 items
@@ -79,10 +78,16 @@ export default class Navbar extends Component {
                 <b className="margin-r">Total</b>
                 <b>$200.00</b>
                 <div>
-                  <button className="bag-btn">View Bag</button>
+                  <a href="/cart">
+                    <button className="bag-btn">View Bag</button>
+                  </a>
                   <button
                     className="cart-btn"
-                    style={{ width: "140px", height: "43px", marginRight: "25px" }}
+                    style={{
+                      width: "140px",
+                      height: "43px",
+                      marginRight: "25px",
+                    }}
                   >
                     Checkout
                   </button>
