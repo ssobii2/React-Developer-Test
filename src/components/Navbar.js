@@ -37,25 +37,15 @@ export default class Navbar extends Component {
     }
   };
 
-
-  handleClickOutsideCart = (event) => {
-    if (
-      this.container_2.current &&
-      !this.container_2.current.contains(event.target)
-    ) {
-      this.setState({
-        cart: false,
-      });
-    }
+  handleClickOutsideCart = () => {
+    this.container_2.current.style.display = "none";
   }
 
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
-    document.addEventListener("mousedown", this.handleClickOutsideCart);
   }
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
-    document.removeEventListener("mousedown", this.handleClickOutsideCart);
   }
 
   constructor(props) {
@@ -127,10 +117,10 @@ export default class Navbar extends Component {
               alt="cart"
               onClick={this.handleClickCart}
             />
-            <div className="badge" ref={this.container_2}>3</div>
+            <div className="badge">3</div>
             {this.state.cart && (
-              <>
-                <div id="overlay"></div>
+              <div ref={this.container_2}>
+                <div id="overlay" onClick={this.handleClickOutsideCart}></div>
                 <div className="dropdown-content-2">
                   <p className="margin-p">
                     <b>My Bag</b>,3 items
@@ -175,7 +165,7 @@ export default class Navbar extends Component {
                     <b>$200.00</b>
                     <div>
                       <Link to="/cart">
-                        <button className="bag-btn">View Bag</button>
+                        <button className="bag-btn" onClick={this.handleClickOutsideCart}>View Bag</button>
                       </Link>
                       <button
                         className="cart-btn"
@@ -190,7 +180,7 @@ export default class Navbar extends Component {
                     </div>
                   </div>
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>

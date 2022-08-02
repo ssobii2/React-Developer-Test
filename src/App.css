@@ -97,6 +97,7 @@ a {
 .dropdown-2 .cart {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 #overlay {
@@ -118,10 +119,6 @@ a {
 .cart {
   margin-left: 40px;
   margin-top: 20px;
-}
-
-.cart:hover {
-  cursor: pointer;
 }
 
 .badge {
