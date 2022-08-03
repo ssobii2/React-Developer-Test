@@ -1,14 +1,33 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { gql } from "@apollo/client";
 import Logo from "../images/a-logo.svg";
-import Dollar from "../images/dollar-sign.svg";
 import Cart from "../images/cart.svg";
 import ProductImg from "../images/product.svg";
 
 export default class Navbar extends Component {
   container = React.createRef();
   container_2 = React.createRef();
+
+  getCurrencies = () => {
+    this.props.client
+      .query({
+        query: gql`
+          {
+            currencies {
+              label
+              symbol
+            }
+          }
+        `,
+      })
+      .then((result) => {
+        this.setState({
+          currencies: result.data.currencies,
+        });
+      });
+  };
 
   handleClick = () => {
     this.setState((state) => {
@@ -24,7 +43,7 @@ export default class Navbar extends Component {
         cart: !state.cart,
       };
     });
-  }
+  };
 
   handleClickOutside = (event) => {
     if (
@@ -39,10 +58,17 @@ export default class Navbar extends Component {
 
   handleClickOutsideCart = () => {
     this.container_2.current.style.display = "none";
+  };
+
+  handleCurrency = (currency) => {
+    this.setState({
+      currentCurrency: currency.symbol,
+    });
   }
 
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
+    this.getCurrencies();
   }
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
@@ -53,6 +79,8 @@ export default class Navbar extends Component {
     this.state = {
       open: false,
       cart: false,
+      currencies: [],
+      currentCurrency: "",
     };
   }
 
@@ -64,19 +92,19 @@ export default class Navbar extends Component {
             to="/"
             className={({ isActive }) => (isActive ? "link-active" : "a")}
           >
-            Women
+            All
           </NavLink>
           <NavLink
-            to="/men"
+            to="/tech"
             className={({ isActive }) => (isActive ? "link-active" : "a")}
           >
-            Men
+            Tech
           </NavLink>
           <NavLink
-            to="/kids"
+            to="/clothes"
             className={({ isActive }) => (isActive ? "link-active" : "a")}
           >
-            Kids
+            Clothes
           </NavLink>
         </div>
         <div className="logo">
@@ -85,29 +113,28 @@ export default class Navbar extends Component {
         <div className="actions">
           <div className="dropdown" ref={this.container}>
             <div className="dropdown-button">
-              <img src={Dollar} alt="dollar" onClick={this.handleClick} />
+              <p onClick={this.handleClick}>{this.state.currentCurrency}</p>
               {this.state.open ? (
                 <FaAngleUp onClick={this.handleClick} />
               ) : (
                 <FaAngleDown onClick={this.handleClick} />
               )}
             </div>
-            {this.state.open && (
+            {this.state.open &&
+            (
               <div className="dropdown-content">
-                <a href="/">
-                  <img src={Dollar} alt="dollar" />
-                  USD
-                </a>
-                <a href="/">
-                  <img src={Dollar} alt="dollar" />
-                  EUR
-                </a>
-                <a href="/">
-                  <img src={Dollar} alt="dollar" />
-                  JPY
-                </a>
+                {
+                  this.state.currencies.map((currency, index) => {
+                    return (
+                        <p key={index} onClick={() => this.handleCurrency(currency)}>
+                          {currency.symbol}{currency.label}
+                        </p>
+                    );
+                  })
+                }
               </div>
-            )}
+            )
+            }
           </div>
 
           <div className="dropdown-2">
@@ -165,7 +192,12 @@ export default class Navbar extends Component {
                     <b>$200.00</b>
                     <div>
                       <Link to="/cart">
-                        <button className="bag-btn" onClick={this.handleClickOutsideCart}>View Bag</button>
+                        <button
+                          className="bag-btn"
+                          onClick={this.handleClickOutsideCart}
+                        >
+                          View Bag
+                        </button>
                       </Link>
                       <button
                         className="cart-btn"
