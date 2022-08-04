@@ -8,6 +8,7 @@ export default class Products extends Component {
       product: {},
       prices: [],
       gallery: [],
+      attributes: [],
       currentImage: "",
     };
   }
@@ -52,6 +53,7 @@ export default class Products extends Component {
           prices: result.data.product.prices,
           gallery: result.data.product.gallery,
           currentImage: result.data.product.gallery[0],
+          attributes: result.data.product.attributes,
         });
       });
   };
@@ -95,21 +97,53 @@ export default class Products extends Component {
           />
           <div className="info">
             <h3>{this.state.product.name}</h3>
-            <h4 className="margin">SIZE:</h4>
-            <button className="size-btn">XS</button>
-            <button className="size-btn">S</button>
-            <button className="size-btn">M</button>
-            <button className="size-btn">L</button>
-            <h4 className="margin">COLOR:</h4>
-            <div className="boxes">
-              <div className="gray"></div>
-              <div className="black"></div>
-              <div className="green"></div>
-            </div>
+            {/* eslint-disable-next-line */}
+            {this.state.attributes.map((attribute, index) => {
+              if (attribute.type === "text") {
+                return (
+                  <>
+                    <h4 className="margin" key={index}>
+                      {attribute.name}:
+                    </h4>
+                    {attribute.items.map((item, index) => {
+                      return (
+                        <button key={index} className="size-btn">
+                          {item.value}
+                        </button>
+                      );
+                    })}
+                  </>
+                );
+              }
+            })}
+            {/* eslint-disable-next-line */}
+            {this.state.attributes.map((attribute, index) => {
+              if (attribute.type === "swatch") {
+                return (
+                  <>
+                    <h4 key={index} className="margin">
+                      {attribute.name}:
+                    </h4>
+                    <div className="boxes">
+                      {attribute.items.map((item, index) => {
+                        return (
+                          <div
+                            key={index}
+                            style={{
+                              backgroundColor: item.value,
+                            }}
+                          ></div>
+                        );
+                      })}
+                    </div>
+                  </>
+                );
+              }
+            })}
             <h4 className="margin">PRICE:</h4>
             {/* eslint-disable-next-line */}
             {this.state.prices.map((price, index) => {
-              if (index === 0) {
+              if (price.currency.symbol === this.props.currentCurrency) {
                 return (
                   <h3 key={index}>
                     {price.currency.symbol}
@@ -119,7 +153,12 @@ export default class Products extends Component {
               }
             })}
             <button className="cart-btn">ADD TO CART</button>
-            <p className="margin">{this.state.product.description}</p>
+            <p
+              className="margin"
+              dangerouslySetInnerHTML={{
+                __html: this.state.product.description,
+              }}
+            ></p>
           </div>
         </div>
       </div>

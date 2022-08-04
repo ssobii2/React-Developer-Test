@@ -9,17 +9,53 @@ import Products from "./components/Products";
 import Tech from "./components/Tech";
 
 class App extends Component {
+  handleCurrency = (currency) => {
+    this.setState({
+      currentCurrency: currency.symbol,
+    });
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentCurrency: "$",
+    };
+  }
+
   render() {
     return (
       <Router>
         <div className="app">
-          <Navbar client={this.props.client}/>
+          <Navbar
+            handleCurrency={this.handleCurrency}
+            currentCurrency={this.state.currentCurrency}
+            client={this.props.client}
+          />
           <Routes>
-            <Route path="/" element={<Category client={this.props.client}/>} />
-            <Route path="/product/:id" element={<Products client={this.props.client}/>} />
+            <Route
+              path="/"
+              element={
+                <Category
+                  currentCurrency={this.state.currentCurrency}
+                  client={this.props.client}
+                />
+              }
+            />
+            <Route
+              path="/product/:id"
+              element={
+                <Products
+                  currentCurrency={this.state.currentCurrency}
+                  client={this.props.client}
+                />
+              }
+            />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/tech" element={<Tech client={this.props.client}/>} />
-            <Route path="/clothes" element={<Clothes client={this.props.client}/>} />
+            <Route path="/tech" element={<Tech client={this.props.client} />} />
+            <Route
+              path="/clothes"
+              element={<Clothes client={this.props.client} />}
+            />
           </Routes>
         </div>
       </Router>

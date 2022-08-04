@@ -60,11 +60,11 @@ export default class Navbar extends Component {
     this.container_2.current.style.display = "none";
   };
 
-  handleCurrency = (currency) => {
-    this.setState({
-      currentCurrency: currency.symbol,
-    });
-  }
+  // handleCurrency = (currency) => {
+  //   this.setState({
+  //     currentCurrency: currency.symbol,
+  //   });
+  // }
 
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
@@ -80,7 +80,7 @@ export default class Navbar extends Component {
       open: false,
       cart: false,
       currencies: [],
-      currentCurrency: "",
+      // currentCurrency: "",
     };
   }
 
@@ -113,7 +113,7 @@ export default class Navbar extends Component {
         <div className="actions">
           <div className="dropdown" ref={this.container}>
             <div className="dropdown-button">
-              <p onClick={this.handleClick}>{this.state.currentCurrency}</p>
+              <p onClick={this.handleClick}>{this.props.currentCurrency}</p>
               {this.state.open ? (
                 <FaAngleUp onClick={this.handleClick} />
               ) : (
@@ -126,8 +126,8 @@ export default class Navbar extends Component {
                 {
                   this.state.currencies.map((currency, index) => {
                     return (
-                        <p key={index} onClick={() => this.handleCurrency(currency)}>
-                          {currency.symbol}{currency.label}
+                        <p key={index} onClick={() => this.props.handleCurrency(currency)}>
+                          {currency.symbol} {currency.label}
                         </p>
                     );
                   })

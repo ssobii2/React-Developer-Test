@@ -1,7 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Raleway";
+  font-style: normal;
 }
 
 .nav-bar {
@@ -28,8 +32,8 @@ a {
 }
 
 .link-active {
-  color: #5ECE7B;
-  border-bottom: 2px solid #5ECE7B;
+  color: #5ece7b;
+  border-bottom: 2px solid #5ece7b;
   padding-left: 1rem;
   padding-right: 1rem;
 }
@@ -58,7 +62,7 @@ a {
   height: 29px;
   font-weight: 600;
   font-size: 20px;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 .dropdown-content p {
@@ -67,6 +71,7 @@ a {
   text-decoration: none;
   display: flex;
   align-items: center;
+  font-weight: 500;
 }
 
 .dropdown-content {
@@ -140,7 +145,6 @@ a {
   width: 20px;
   height: 20px;
   text-align: center;
-  padding-top: 1px;
 }
 
 .category h2 {
@@ -182,6 +186,22 @@ a {
 
 .container {
   position: relative;
+}
+
+.in-stock {
+  background: #ffffff;
+  opacity: 0.5;
+}
+
+.text-overlay {
+  position: absolute;
+  left: 25.42%;
+  right: 25.71%;
+  top: 44.24%;
+  bottom: 43.94%;
+  font-weight: 400;
+  font-size: 24px;
+  color: #8d8f9a;
 }
 
 .circle {
@@ -268,18 +288,6 @@ a {
 .boxes-2 div {
   width: 16px;
   height: 16px;
-}
-
-.gray {
-  background-color: #d3d2d5;
-}
-
-.black {
-  background-color: #2b2b2b;
-}
-
-.green {
-  background-color: #0f6450;
 }
 
 .cart-btn {
