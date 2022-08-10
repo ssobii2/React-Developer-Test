@@ -15,10 +15,29 @@ class App extends Component {
     });
   };
 
+  handleAddToCart = (product) => {
+    const existingProduct = this.state.cart.find(
+      (item) => item.id === product.id
+    );
+    if (existingProduct) {
+      existingProduct.quantity = 1;
+    }
+    else {
+      this.state.cart.push({ ...product, quantity: 1, quantityPrice: product.prices[0].amount });
+    }
+
+    this.setState({ cart: this.state.cart });
+  };
+
+  setCart = (cart) => {
+    this.setState({ cart });
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       currentCurrency: "$",
+      cart: [],
     };
   }
 
@@ -30,6 +49,7 @@ class App extends Component {
             handleCurrency={this.handleCurrency}
             currentCurrency={this.state.currentCurrency}
             client={this.props.client}
+            cart={this.state.cart}
           />
           <Routes>
             <Route
@@ -47,10 +67,20 @@ class App extends Component {
                 <Products
                   currentCurrency={this.state.currentCurrency}
                   client={this.props.client}
+                  handleAddToCart={this.handleAddToCart}
                 />
               }
             />
-            <Route path="/cart" element={<Cart />} />
+            <Route
+              path="/cart"
+              element={
+                <Cart
+                  cart={this.state.cart}
+                  currentCurrency={this.state.currentCurrency}
+                  setCart={this.setCart}
+                />
+              }
+            />
             <Route path="/tech" element={<Tech client={this.props.client} />} />
             <Route
               path="/clothes"

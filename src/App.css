@@ -250,6 +250,10 @@ a {
   width: 300px;
 }
 
+.info-cart {
+  width: 100%;
+}
+
 .info-width {
   width: 150px;
   margin-left: 20px;
@@ -264,11 +268,20 @@ a {
 }
 
 .sz-btn {
-  width: 24px;
+  width: 44px;
   height: 24px;
+  border: 1px solid #1d1f22;
+  background-color: white;
+  margin-right: 5px;
 }
 
 .size-btn:hover {
+  background-color: #1d1f22;
+  color: white;
+  cursor: pointer;
+}
+
+.sz-btn:hover {
   background-color: #1d1f22;
   color: white;
   cursor: pointer;
@@ -300,6 +313,12 @@ a {
   margin-top: 30px;
 }
 
+.disable {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
 .margin {
   margin-top: 30px;
 }
@@ -314,9 +333,7 @@ a {
 }
 
 .cart-products {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  width: 100%;
 }
 
 .cart-product {
@@ -366,18 +383,18 @@ a {
 
 .container-btn-1 {
   position: absolute;
-  top: 180px;
-  left: 200px;
+  top: 250px;
+  left: 175px;
 }
 
 .container-btn-2 {
   position: absolute;
-  top: 180px;
-  left: 230px;
+  top: 250px;
+  left: 210px;
 }
 
 .container button {
-  background-color: #1d1f22;
+  background: rgba(0, 0, 0, 0.73);
   color: white;
   cursor: pointer;
 }
@@ -390,10 +407,6 @@ a {
   margin-bottom: 5px;
 }
 
-.mini-cart b {
-  margin-left: 20px;
-}
-
 .mini-cart button {
   margin-left: 20px;
   margin-top: 20px;
@@ -402,10 +415,6 @@ a {
 .mini-cart div {
   display: flex;
   justify-content: space-between;
-}
-
-.margin-r {
-  margin-right: 280px;
 }
 
 .bag-btn {

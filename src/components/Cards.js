@@ -15,33 +15,32 @@ export default class Cards extends Component {
           ) : (
             ""
           )}
-          <Link to={`/product/${this.props.product.id}`}>
-            <img
-              className={style}
-              src={this.props.product.gallery[0]}
-              alt="product"
-              width="354px"
-              height="330px"
-            />
-          </Link>
+          <img
+            className={style}
+            src={this.props.product.gallery[0]}
+            alt="product"
+            width="354px"
+            height="330px"
+          />
           <p id="text"></p>
-          <img className="circle" src={Circle} alt="cart" />
+          <Link to={`/product/${this.props.product.id}`}>
+            <img className="circle" src={Circle} alt="cart" />
+          </Link>
         </div>
         <div className="card-p">
           <p>{this.props.product.name}</p>
           <p>
             {/* eslint-disable-next-line */}
-            {this.props.product.prices.map((price) => {
+            {this.props.product.prices.map((price, index) => {
               if (price.currency.symbol === this.props.currentCurrency) {
                 return (
-                  <b>
+                  <b key={index}>
                     {price.currency.symbol}
                     {price.amount}
                   </b>
                 );
               }
-            }
-            )}
+            })}
           </p>
         </div>
       </div>

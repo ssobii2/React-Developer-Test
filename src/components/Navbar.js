@@ -4,7 +4,6 @@ import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { gql } from "@apollo/client";
 import Logo from "../images/a-logo.svg";
 import Cart from "../images/cart.svg";
-import ProductImg from "../images/product.svg";
 
 export default class Navbar extends Component {
   container = React.createRef();
@@ -40,7 +39,7 @@ export default class Navbar extends Component {
   handleClickCart = () => {
     this.setState((state) => {
       return {
-        cart: !state.cart,
+        open_2: !state.open_2,
       };
     });
   };
@@ -60,12 +59,6 @@ export default class Navbar extends Component {
     this.container_2.current.style.display = "none";
   };
 
-  // handleCurrency = (currency) => {
-  //   this.setState({
-  //     currentCurrency: currency.symbol,
-  //   });
-  // }
-
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
     this.getCurrencies();
@@ -78,13 +71,22 @@ export default class Navbar extends Component {
     super(props);
     this.state = {
       open: false,
-      cart: false,
+      open_2: false,
       currencies: [],
-      // currentCurrency: "",
     };
   }
 
   render() {
+    let total = 0;
+    this.props.cart.forEach((product) => {
+      /* eslint-disable-next-line */
+      product.prices.map((price) => {
+        if (price.currency.symbol === this.props.currentCurrency) {
+          total += price.amount;
+        }
+      });
+    });
+
     return (
       <nav className="nav-bar">
         <div className="nav-items">
@@ -120,21 +122,20 @@ export default class Navbar extends Component {
                 <FaAngleDown onClick={this.handleClick} />
               )}
             </div>
-            {this.state.open &&
-            (
+            {this.state.open && (
               <div className="dropdown-content">
-                {
-                  this.state.currencies.map((currency, index) => {
-                    return (
-                        <p key={index} onClick={() => this.props.handleCurrency(currency)}>
-                          {currency.symbol} {currency.label}
-                        </p>
-                    );
-                  })
-                }
+                {this.state.currencies.map((currency, index) => {
+                  return (
+                    <p
+                      key={index}
+                      onClick={() => this.props.handleCurrency(currency)}
+                    >
+                      {currency.symbol} {currency.label}
+                    </p>
+                  );
+                })}
               </div>
-            )
-            }
+            )}
           </div>
 
           <div className="dropdown-2">
@@ -144,52 +145,121 @@ export default class Navbar extends Component {
               alt="cart"
               onClick={this.handleClickCart}
             />
-            <div className="badge">3</div>
-            {this.state.cart && (
+            <div className="badge">{this.props.cart.length}</div>
+            {this.state.open_2 && (
               <div ref={this.container_2}>
                 <div id="overlay" onClick={this.handleClickOutsideCart}></div>
                 <div className="dropdown-content-2">
                   <p className="margin-p">
-                    <b>My Bag</b>,3 items
+                    <b>My Bag</b>, {this.props.cart.length} items
                   </p>
-                  <div className="cart-product">
-                    <div className="info-width">
-                      <p>Apollo</p>
-                      <p>Running Short</p>
-                      <h3 className="mb">$50.00</h3>
-                      <p className="mb">Size:</p>
-                      <button className="size-btn sz-btn">XS</button>
-                      <button className="size-btn sz-btn">S</button>
-                      <button className="size-btn sz-btn">M</button>
-                      <button className="size-btn sz-btn">L</button>
-                      <p className="mb">Color:</p>
-                      <div className="boxes boxes-2">
-                        <div className="gray"></div>
-                        <div className="black"></div>
-                        <div className="green"></div>
+                  {/* eslint-disable-next-line */}
+                  {this.props.cart.map((product, index) => (
+                    <>
+                      <div className="cart-product">
+                        <div className="info-width" key={index}>
+                          <p>{product.name}</p>
+                          <h3 className="mb">
+                            {/* eslint-disable-next-line */}
+                            {product.prices.map((price, index) => {
+                              if (price.currency.symbol === this.props.currentCurrency) {
+                                return (
+                                  <b key={index}>
+                                    {price.currency.symbol} {price.amount}
+                                  </b>
+                                );
+                              }
+                            })}
+                          </h3>
+                          {/* eslint-disable-next-line */}
+                          {product.attributes.map((attribute, index) => {
+                            if (attribute.type === "text") {
+                              return (
+                                <>
+                                  <p className="mb" key={index}>
+                                    {attribute.name}:
+                                  </p>
+                                  {attribute.items.map((item, index) => {
+                                    return (
+                                      <button key={index} className="sz-btn">
+                                        {item.value}
+                                      </button>
+                                    );
+                                  })}
+                                </>
+                              );
+                            }
+                          })}
+                          {/* eslint-disable-next-line */}
+                          {product.attributes.map((attribute, index) => {
+                            if (attribute.type === "swatch") {
+                              return (
+                                <>
+                                  <p className="mb" key={index}>
+                                    {attribute.name}:
+                                  </p>
+                                  <div className="boxes boxes-2">
+                                    {attribute.items.map((item, index) => {
+                                      return (
+                                        <div
+                                          key={index}
+                                          style={{
+                                            backgroundColor: item.value,
+                                          }}
+                                        ></div>
+                                      );
+                                    })}
+                                  </div>
+                                </>
+                              );
+                            }
+                          })}
+                        </div>
+                        <div className="mp-btn">
+                          <div className="m-p-btn">
+                            <button style={{ width: "24px", height: "24px" }}>
+                              +
+                            </button>
+                            <p>1</p>
+                            <button style={{ width: "24px", height: "24px" }}>
+                              -
+                            </button>
+                          </div>
+                          {/* eslint-disable-next-line */}
+                          {product.gallery.map((image, index) => {
+                            if (index === 0) {
+                              return (
+                                <img
+                                  style={{paddingLeft: "10px"}}
+                                  key={index}
+                                  src={image}
+                                  alt="product"
+                                  width="151px"
+                                  height="190px"
+                                />
+                              );
+                            }
+                          })}
+                        </div>
                       </div>
-                    </div>
-                    <div className="mp-btn">
-                      <div className="m-p-btn">
-                        <button style={{ width: "24px", height: "24px" }}>
-                          +
-                        </button>
-                        <p>1</p>
-                        <button style={{ width: "24px", height: "24px" }}>
-                          -
-                        </button>
-                      </div>
-                      <img
-                        src={ProductImg}
-                        alt="product"
-                        width="221px"
-                        height="190px"
-                      />
-                    </div>
-                  </div>
+                    </>
+                  ))}
                   <div className="mini-cart">
-                    <b className="margin-r">Total</b>
-                    <b>$200.00</b>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        paddingLeft: "1rem",
+                        paddingRight: "1rem",
+                      }}
+                    >
+                      <div>
+                        <b>Total</b>
+                      </div>
+                      <div>
+                        <b>{this.props.currentCurrency} {total}</b>
+                      </div>
+                    </div>
                     <div>
                       <Link to="/cart">
                         <button

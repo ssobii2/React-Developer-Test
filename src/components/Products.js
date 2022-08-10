@@ -152,7 +152,19 @@ export default class Products extends Component {
                 );
               }
             })}
-            <button className="cart-btn">ADD TO CART</button>
+            {this.state.product.inStock ? (
+              <button
+                className="cart-btn"
+                onClick={() => this.props.handleAddToCart(this.state.product)}
+              >
+                ADD TO CART
+              </button>
+            ) : (
+              <button disabled className="cart-btn disable">
+                ADD TO CART
+              </button>
+            )}
+
             <p
               className="margin"
               dangerouslySetInnerHTML={{
