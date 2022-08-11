@@ -9,6 +9,40 @@ import Products from "./components/Products";
 import Tech from "./components/Tech";
 
 class App extends Component {
+  plusButton = (id) => {
+    const existingProduct = this.state.cart.find((item) => item.id === id);
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+      existingProduct.prices.forEach((price, index) => {
+        if (index === 0) {
+          existingProduct.quantityPrice =
+            existingProduct.quantityPrice + price.amount;
+        }
+      });
+    }
+    this.setState({ cart: this.state.cart });
+  };
+
+  minusButton = (id) => {
+    const existingProduct = this.state.cart.find((item) => item.id === id);
+    if (existingProduct) {
+      existingProduct.quantity = Math.max(0, existingProduct.quantity - 1);
+      existingProduct.prices.forEach((price, index) => {
+        if (index === 0) {
+          existingProduct.quantityPrice =
+            existingProduct.quantityPrice - price.amount;
+        }
+      });
+      this.setState({ cart: this.state.cart });
+    }
+    if (existingProduct.quantity === 0) {
+      const remainingProducts = this.state.cart.filter(
+        (item) => item.id !== id
+      );
+      this.setState({ cart: remainingProducts });
+    }
+  };
+
   handleCurrency = (currency) => {
     this.setState({
       currentCurrency: currency.symbol,
@@ -21,16 +55,18 @@ class App extends Component {
     );
     if (existingProduct) {
       existingProduct.quantity = 1;
+    } else {
+      this.state.cart.push({
+        ...product,
+        quantity: 1,
+        quantityPrice: product.prices[0].amount,
+      });
     }
-    else {
-      this.state.cart.push({ ...product, quantity: 1, quantityPrice: product.prices[0].amount });
-    }
-
     this.setState({ cart: this.state.cart });
   };
 
-  setCart = (cart) => {
-    this.setState({ cart });
+  setActive = (active) => {
+    this.setState({ active });
   }
 
   constructor(props) {
@@ -38,6 +74,7 @@ class App extends Component {
     this.state = {
       currentCurrency: "$",
       cart: [],
+      active: [],
     };
   }
 
@@ -50,6 +87,9 @@ class App extends Component {
             currentCurrency={this.state.currentCurrency}
             client={this.props.client}
             cart={this.state.cart}
+            minusButton={this.minusButton}
+            plusButton={this.plusButton}
+            active={this.state.active}
           />
           <Routes>
             <Route
@@ -68,6 +108,8 @@ class App extends Component {
                   currentCurrency={this.state.currentCurrency}
                   client={this.props.client}
                   handleAddToCart={this.handleAddToCart}
+                  active={this.state.active}
+                  setActive={this.setActive}
                 />
               }
             />
@@ -77,7 +119,9 @@ class App extends Component {
                 <Cart
                   cart={this.state.cart}
                   currentCurrency={this.state.currentCurrency}
-                  setCart={this.setCart}
+                  minusButton={this.minusButton}
+                  plusButton={this.plusButton}
+                  active={this.state.active}
                 />
               }
             />

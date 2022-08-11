@@ -62,6 +62,14 @@ export default class Navbar extends Component {
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
     this.getCurrencies();
+    this.props.cart.forEach((product) => {
+      /* eslint-disable-next-line */
+      product.prices.map((price, index) => {
+        if (index === 0) {
+          product.quantityPrice = price.amount;
+        }
+      });
+    });
   }
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
@@ -82,10 +90,12 @@ export default class Navbar extends Component {
       /* eslint-disable-next-line */
       product.prices.map((price) => {
         if (price.currency.symbol === this.props.currentCurrency) {
-          total += price.amount;
+          total += product.quantityPrice;
         }
       });
     });
+    let tax = total * 0.21;
+    total = total + tax;
 
     return (
       <nav className="nav-bar">
@@ -162,7 +172,10 @@ export default class Navbar extends Component {
                           <h3 className="mb">
                             {/* eslint-disable-next-line */}
                             {product.prices.map((price, index) => {
-                              if (price.currency.symbol === this.props.currentCurrency) {
+                              if (
+                                price.currency.symbol ===
+                                this.props.currentCurrency
+                              ) {
                                 return (
                                   <b key={index}>
                                     {price.currency.symbol} {price.amount}
@@ -181,7 +194,7 @@ export default class Navbar extends Component {
                                   </p>
                                   {attribute.items.map((item, index) => {
                                     return (
-                                      <button key={index} className="sz-btn">
+                                      <button className="sz-btn" key={index}>
                                         {item.value}
                                       </button>
                                     );
@@ -217,11 +230,17 @@ export default class Navbar extends Component {
                         </div>
                         <div className="mp-btn">
                           <div className="m-p-btn">
-                            <button style={{ width: "24px", height: "24px" }}>
+                            <button
+                              onClick={() => this.props.plusButton(product.id)}
+                              style={{ width: "24px", height: "24px" }}
+                            >
                               +
                             </button>
-                            <p>1</p>
-                            <button style={{ width: "24px", height: "24px" }}>
+                            <p>{product.quantity}</p>
+                            <button
+                              onClick={() => this.props.minusButton(product.id)}
+                              style={{ width: "24px", height: "24px" }}
+                            >
                               -
                             </button>
                           </div>
@@ -230,7 +249,7 @@ export default class Navbar extends Component {
                             if (index === 0) {
                               return (
                                 <img
-                                  style={{paddingLeft: "10px"}}
+                                  style={{ paddingLeft: "10px" }}
                                   key={index}
                                   src={image}
                                   alt="product"
@@ -257,7 +276,9 @@ export default class Navbar extends Component {
                         <b>Total</b>
                       </div>
                       <div>
-                        <b>{this.props.currentCurrency} {total}</b>
+                        <b>
+                          {this.props.currentCurrency} {total}
+                        </b>
                       </div>
                     </div>
                     <div>

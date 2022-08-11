@@ -13,6 +13,14 @@ export default class Products extends Component {
     };
   }
 
+  handleButtonClick = (id) => {
+    if (this.props.active.includes(id)) {
+      this.props.active.splice(this.props.active.indexOf(id), 1);
+    } else {
+      this.props.setActive(id);
+    }
+  };
+
   getProduct = (id) => {
     this.props.client
       .query({
@@ -107,7 +115,15 @@ export default class Products extends Component {
                     </h4>
                     {attribute.items.map((item, index) => {
                       return (
-                        <button key={index} className="size-btn">
+                        <button
+                          onClick={() => this.handleButtonClick(item.id)}
+                          className={
+                            this.props.active === item.id
+                              ? "size-btn active"
+                              : "size-btn"
+                          }
+                          key={index}
+                        >
                           {item.value}
                         </button>
                       );

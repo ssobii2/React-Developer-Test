@@ -265,6 +265,12 @@ a {
   border: 1px solid #1d1f22;
   background-color: white;
   margin-right: 10px;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #1d1f22;
+  color: white;
 }
 
 .sz-btn {
@@ -273,17 +279,6 @@ a {
   border: 1px solid #1d1f22;
   background-color: white;
   margin-right: 5px;
-}
-
-.size-btn:hover {
-  background-color: #1d1f22;
-  color: white;
-  cursor: pointer;
-}
-
-.sz-btn:hover {
-  background-color: #1d1f22;
-  color: white;
   cursor: pointer;
 }
 
@@ -296,6 +291,10 @@ a {
   height: 36px;
   margin-right: 5px;
   border: 1px solid #5ece7b;
+}
+
+.boxes div:hover {
+  border: 3px solid #5ece7b;
 }
 
 .boxes-2 div {

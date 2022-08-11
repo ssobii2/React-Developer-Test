@@ -64,7 +64,7 @@ export default class Tech extends Component {
         <h2>{this.state.category.toUpperCase()}</h2>
         <div className="grid">
           {this.state.products.map((product) => {
-            return <Cards key={product.id} product={product} />;
+            return <Cards key={product.id} product={product} currentCurrency={this.props.currentCurrency} />;
           })}
         </div>
       </div>
