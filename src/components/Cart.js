@@ -2,17 +2,6 @@ import React, { Component } from "react";
 import CartProducts from "./CartProducts";
 
 export default class Cart extends Component {
-  componentDidMount() {
-    this.props.cart.forEach((product) => {
-      /* eslint-disable-next-line */
-      product.prices.map((price, index) => {
-        if (index === 0) {
-          product.quantityPrice = price.amount;
-        }
-      });
-    });
-  }
-
   render() {
     let total = 0;
     this.props.cart.forEach((product) => {
@@ -24,6 +13,7 @@ export default class Cart extends Component {
       });
     });
     let tax = total * 0.21;
+    
     return (
       <div className="cart">
         <h2>CART</h2>
@@ -35,8 +25,11 @@ export default class Cart extends Component {
               key={index}
               minusButton={this.props.minusButton}
               plusButton={this.props.plusButton}
-              activeSize={this.props.activeSize}
-              activeCapacity={this.props.activeCapacity}
+              color={this.props.color}
+              activeSize_1={this.props.activeSize_1}
+              activeSize_2={this.props.activeSize_2}
+              activeCapacity_1={this.props.activeCapacity_1}
+              activeCapacity_2={this.props.activeCapacity_2}
               activeImac_1={this.props.activeImac_1}
               activeImac_2={this.props.activeImac_2}
             />

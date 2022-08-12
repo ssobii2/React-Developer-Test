@@ -286,14 +286,15 @@ a {
   display: flex;
 }
 
-.boxes div {
+.boxes-div {
   width: 36px;
   height: 36px;
   margin-right: 5px;
   border: 1px solid #5ece7b;
+  cursor: pointer;
 }
 
-.boxes div:hover {
+.active-color {
   border: 3px solid #5ece7b;
 }
 

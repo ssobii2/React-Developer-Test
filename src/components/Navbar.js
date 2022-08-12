@@ -62,15 +62,8 @@ export default class Navbar extends Component {
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
     this.getCurrencies();
-    this.props.cart.forEach((product) => {
-      /* eslint-disable-next-line */
-      product.prices.map((price, index) => {
-        if (index === 0) {
-          product.quantityPrice = price.amount;
-        }
-      });
-    });
   }
+
   componentWillUnmount() {
     document.removeEventListener("mousedown", this.handleClickOutside);
   }
@@ -193,35 +186,82 @@ export default class Navbar extends Component {
                                   {/* eslint-disable-next-line */}
                                   {attribute.items.map((item, index) => {
                                     if (attribute.id === "Size") {
-                                      return (
-                                        <button
-                                          className={
-                                            this.props.activeSize.includes(
-                                              item.id
-                                            )
-                                              ? "sz-btn active"
-                                              : "sz-btn"
-                                          }
-                                          key={index}
-                                        >
-                                          {item.value}
-                                        </button>
-                                      );
+                                      if (
+                                        item.value === "S" ||
+                                        "M" ||
+                                        "L" ||
+                                        "XL"
+                                      ) {
+                                        return (
+                                          <button
+                                            className={
+                                              this.props.activeSize_1.includes(
+                                                item.id
+                                              )
+                                                ? "sz-btn active"
+                                                : "sz-btn"
+                                            }
+                                            key={index}
+                                          >
+                                            {item.value}
+                                          </button>
+                                        );
+                                      } else if (
+                                        item.value === "40" ||
+                                        "41" ||
+                                        "42" ||
+                                        "43"
+                                      ) {
+                                        return (
+                                          <button
+                                            className={
+                                              this.props.activeSize_2.includes(
+                                                item.id
+                                              )
+                                                ? "sz-btn active"
+                                                : "sz-btn"
+                                            }
+                                            key={index}
+                                          >
+                                            {item.value}
+                                          </button>
+                                        );
+                                      }
                                     } else if (attribute.id === "Capacity") {
-                                      return (
-                                        <button
-                                          className={
-                                            this.props.activeCapacity.includes(
-                                              item.id
-                                            )
-                                              ? "sz-btn active"
-                                              : "sz-btn"
-                                          }
-                                          key={index}
-                                        >
-                                          {item.value}
-                                        </button>
-                                      );
+                                      if (item.value === "512G" || "1T") {
+                                        return (
+                                          <button
+                                            className={
+                                              this.props.activeCapacity_1.includes(
+                                                item.id
+                                              )
+                                                ? "sz-btn active"
+                                                : "sz-btn"
+                                            }
+                                            key={index}
+                                          >
+                                            {item.value}
+                                          </button>
+                                        );
+                                      } else if (
+                                        item.value === "256GB" ||
+                                        "512GB"
+                                      ) {
+                                        return (
+                                          <button
+                                            className={
+                                              this.props.activeCapacity_2.includes(
+                                                item.id
+                                              )
+                                                ? "sz-btn active"
+                                                : "sz-btn"
+                                            }
+                                            key={index}
+                                          >
+                                            {item.value}
+                                          </button>
+                                        );
+                                      }
                                     } else if (
                                       attribute.id === "With USB 3 ports"
                                     ) {
@@ -274,6 +314,11 @@ export default class Navbar extends Component {
                                     {attribute.items.map((item, index) => {
                                       return (
                                         <div
+                                          className={
+                                            this.props.color.includes(item.id)
+                                              ? "boxes-div active-color"
+                                              : "boxes-div"
+                                          }
                                           key={index}
                                           style={{
                                             backgroundColor: item.value,

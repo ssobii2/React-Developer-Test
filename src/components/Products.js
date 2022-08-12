@@ -13,22 +13,49 @@ export default class Products extends Component {
     };
   }
 
-  handleButtonClick = (id) => {
-    if (this.props.activeSize.includes(id)) {
-      this.props.activeSize.splice(this.props.activeSize.indexOf(id), 1);
+  handleButtonClickColor = (id) => {
+    if (this.props.color.includes(id)) {
+      this.props.setColor(this.props.color.filter((item) => item !== id));
     } else {
-      this.props.setActiveSize(id);
+      this.props.setColor(id);
     }
   };
 
-  handleButtonClick_2 = (id) => {
-    if (this.props.activeCapacity.includes(id)) {
-      this.props.activeCapacity.splice(
-        this.props.activeCapacity.indexOf(id),
+  handleButtonClickSize_1 = (id) => {
+    if (this.props.activeSize_1.includes(id)) {
+      this.props.activeSize_1.splice(this.props.activeSize_1.indexOf(id), 1);
+    } else {
+      this.props.setActiveSize_1(id);
+    }
+  };
+
+  handleButtonClickSize_2 = (id) => {
+    if (this.props.activeSize_2.includes(id)) {
+      this.props.activeSize_2.splice(this.props.activeSize_2.indexOf(id), 1);
+    } else {
+      this.props.setActiveSize_2(id);
+    }
+  };
+
+  handleButtonClickCapacity_1 = (id) => {
+    if (this.props.activeCapacity_1.includes(id)) {
+      this.props.activeCapacity_1.splice(
+        this.props.activeCapacity_1.indexOf(id),
         1
       );
     } else {
-      this.props.setActiveCapacity(id);
+      this.props.setActiveCapacity_1(id);
+    }
+  };
+
+  handleButtonClickCapacity_2 = (id) => {
+    if (this.props.activeCapacity_2.includes(id)) {
+      this.props.activeCapacity_2.splice(
+        this.props.activeCapacity_2.indexOf(id),
+        1
+      );
+    } else {
+      this.props.setActiveCapacity_2(id);
     }
   };
 
@@ -143,33 +170,78 @@ export default class Products extends Component {
                     {/* eslint-disable-next-line */}
                     {attribute.items.map((item, index) => {
                       if (attribute.id === "Size") {
-                        return (
-                          <button
-                            onClick={() => this.handleButtonClick(item.id)}
-                            className={
-                              this.props.activeSize.includes(item.id)
-                                ? "size-btn active"
-                                : "size-btn"
-                            }
-                            key={index}
-                          >
-                            {item.value}
-                          </button>
-                        );
+                        if (item.value === "S" || "M" || "L" || "XL") {
+                          return (
+                            <button
+                              onClick={() =>
+                                this.handleButtonClickSize_1(item.id)
+                              }
+                              className={
+                                this.props.activeSize_1.includes(item.id)
+                                  ? "size-btn active"
+                                  : "size-btn"
+                              }
+                              key={index}
+                            >
+                              {item.value}
+                            </button>
+                          );
+                        } else if (
+                          item.value === "40" ||
+                          "41" ||
+                          "42" ||
+                          "43"
+                        ) {
+                          return (
+                            <button
+                              onClick={() =>
+                                this.handleButtonClickSize_2(item.id)
+                              }
+                              className={
+                                this.props.activeSize_2.includes(item.id)
+                                  ? "size-btn active"
+                                  : "size-btn"
+                              }
+                              key={index}
+                            >
+                              {item.value}
+                            </button>
+                          );
+                        }
                       } else if (attribute.id === "Capacity") {
-                        return (
-                          <button
-                            onClick={() => this.handleButtonClick_2(item.id)}
-                            className={
-                              this.props.activeCapacity.includes(item.id)
-                                ? "size-btn active"
-                                : "size-btn"
-                            }
-                            key={index}
-                          >
-                            {item.value}
-                          </button>
-                        );
+                        if (item.value === "512G" || "1T") {
+                          return (
+                            <button
+                              onClick={() =>
+                                this.handleButtonClickCapacity_1(item.id)
+                              }
+                              className={
+                                this.props.activeCapacity_1.includes(item.id)
+                                  ? "size-btn active"
+                                  : "size-btn"
+                              }
+                              key={index}
+                            >
+                              {item.value}
+                            </button>
+                          );
+                        } else if (item.value === "256GB" || "512GB") {
+                          return (
+                            <button
+                              onClick={() =>
+                                this.handleButtonClickCapacity_2(item.id)
+                              }
+                              className={
+                                this.props.activeCapacity_2.includes(item.id)
+                                  ? "size-btn active"
+                                  : "size-btn"
+                              }
+                              key={index}
+                            >
+                              {item.value}
+                            </button>
+                          );
+                        }
                       } else if (attribute.id === "With USB 3 ports") {
                         return (
                           <button
@@ -216,6 +288,12 @@ export default class Products extends Component {
                       {attribute.items.map((item, index) => {
                         return (
                           <div
+                            onClick={() => this.handleButtonClickColor(item.id)}
+                            className={
+                              this.props.color.includes(item.id)
+                                ? "boxes-div active-color"
+                                : "boxes-div"
+                            }
                             key={index}
                             style={{
                               backgroundColor: item.value,
@@ -242,8 +320,11 @@ export default class Products extends Component {
             })}
 
             {this.state.product.inStock &&
-            (this.props.activeSize.length >= 1 ||
-              this.props.activeCapacity.length >= 1) ? (
+            (this.props.activeSize_1.length >= 1 ||
+              this.props.activeSize_2.length >= 1 ||
+              this.props.activeCapacity_1.length >= 1 ||
+              this.props.activeCapacity_2.length >= 1 ||
+              this.props.color.length >= 1) ? (
               <button
                 className="cart-btn"
                 onClick={() => this.props.handleAddToCart(this.state.product)}

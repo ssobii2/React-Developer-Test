@@ -65,29 +65,44 @@ class App extends Component {
     this.setState({ cart: this.state.cart });
   };
 
-  setActiveSize = (activeSize) => {
-    this.setState({ activeSize: activeSize });
-  }
+  setColor = (color) => {
+    this.setState({ color: color });
+  };
 
-  setActiveCapacity = (activeCapacity) => {
-    this.setState({ activeCapacity: activeCapacity });
-  }
+  setActiveSize_1 = (activeSize_1) => {
+    this.setState({ activeSize_1: activeSize_1 });
+  };
+
+  setActiveSize_2 = (activeSize_2) => {
+    this.setState({ activeSize_2: activeSize_2 });
+  };
+
+  setActiveCapacity_1 = (activeCapacity_1) => {
+    this.setState({ activeCapacity_1: activeCapacity_1 });
+  };
+
+  setActiveCapacity_2 = (activeCapacity_2) => {
+    this.setState({ activeCapacity_2: activeCapacity_2 });
+  };
 
   setActiveImac_1 = (activeImac_1) => {
     this.setState({ activeImac_1: activeImac_1 });
-  }
+  };
 
   setActiveImac_2 = (activeImac_2) => {
     this.setState({ activeImac_2: activeImac_2 });
-  }
+  };
 
   constructor(props) {
     super(props);
     this.state = {
       currentCurrency: "$",
       cart: [],
-      activeSize: [],
-      activeCapacity: [],
+      color: [],
+      activeSize_1: [],
+      activeSize_2: [],
+      activeCapacity_1: [],
+      activeCapacity_2: [],
       activeImac_1: [],
       activeImac_2: [],
     };
@@ -104,8 +119,11 @@ class App extends Component {
             cart={this.state.cart}
             minusButton={this.minusButton}
             plusButton={this.plusButton}
-            activeSize={this.state.activeSize}
-            activeCapacity={this.state.activeCapacity}
+            color={this.state.color}
+            activeSize_1={this.state.activeSize_1}
+            activeSize_2={this.state.activeSize_2}
+            activeCapacity_1={this.state.activeCapacity_1}
+            activeCapacity_2={this.state.activeCapacity_2}
             activeImac_1={this.state.activeImac_1}
             activeImac_2={this.state.activeImac_2}
           />
@@ -126,12 +144,18 @@ class App extends Component {
                   currentCurrency={this.state.currentCurrency}
                   client={this.props.client}
                   handleAddToCart={this.handleAddToCart}
-                  activeSize={this.state.activeSize}
-                  activeCapacity={this.state.activeCapacity}
+                  color={this.state.color}
+                  setColor={this.setColor}
+                  activeSize_1={this.state.activeSize_1}
+                  activeSize_2={this.state.activeSize_2}
+                  activeCapacity_1={this.state.activeCapacity_1}
+                  activeCapacity_2={this.state.activeCapacity_2}
                   activeImac_1={this.state.activeImac_1}
                   activeImac_2={this.state.activeImac_2}
-                  setActiveSize={this.setActiveSize}
-                  setActiveCapacity={this.setActiveCapacity}
+                  setActiveSize_1={this.setActiveSize_1}
+                  setActiveSize_2={this.setActiveSize_2}
+                  setActiveCapacity_1={this.setActiveCapacity_1}
+                  setActiveCapacity_2={this.setActiveCapacity_2}
                   setActiveImac_1={this.setActiveImac_1}
                   setActiveImac_2={this.setActiveImac_2}
                 />
@@ -145,8 +169,11 @@ class App extends Component {
                   currentCurrency={this.state.currentCurrency}
                   minusButton={this.minusButton}
                   plusButton={this.plusButton}
-                  activeSize={this.state.activeSize}
-                  activeCapacity={this.state.activeCapacity}
+                  color={this.state.color}
+                  activeSize_1={this.state.activeSize_1}
+                  activeSize_2={this.state.activeSize_2}
+                  activeCapacity_1={this.state.activeCapacity_1}
+                  activeCapacity_2={this.state.activeCapacity_2}
                   activeImac_1={this.state.activeImac_1}
                   activeImac_2={this.state.activeImac_2}
                 />
