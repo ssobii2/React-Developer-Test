@@ -14,10 +14,37 @@ export default class Products extends Component {
   }
 
   handleButtonClick = (id) => {
-    if (this.props.active.includes(id)) {
-      this.props.active.splice(this.props.active.indexOf(id), 1);
+    if (this.props.activeSize.includes(id)) {
+      this.props.activeSize.splice(this.props.activeSize.indexOf(id), 1);
     } else {
-      this.props.setActive(id);
+      this.props.setActiveSize(id);
+    }
+  };
+
+  handleButtonClick_2 = (id) => {
+    if (this.props.activeCapacity.includes(id)) {
+      this.props.activeCapacity.splice(
+        this.props.activeCapacity.indexOf(id),
+        1
+      );
+    } else {
+      this.props.setActiveCapacity(id);
+    }
+  };
+
+  handleButtonClick_3 = (id) => {
+    if (this.props.activeImac_1.includes(id)) {
+      this.props.activeImac_1.splice(this.props.activeImac_1.indexOf(id), 1);
+    } else {
+      this.props.setActiveImac_1(id);
+    }
+  };
+
+  handleButtonClick_4 = (id) => {
+    if (this.props.activeImac_2.includes(id)) {
+      this.props.activeImac_2.splice(this.props.activeImac_2.indexOf(id), 1);
+    } else {
+      this.props.setActiveImac_2(id);
     }
   };
 
@@ -113,20 +140,65 @@ export default class Products extends Component {
                     <h4 className="margin" key={index}>
                       {attribute.name}:
                     </h4>
+                    {/* eslint-disable-next-line */}
                     {attribute.items.map((item, index) => {
-                      return (
-                        <button
-                          onClick={() => this.handleButtonClick(item.id)}
-                          className={
-                            this.props.active === item.id
-                              ? "size-btn active"
-                              : "size-btn"
-                          }
-                          key={index}
-                        >
-                          {item.value}
-                        </button>
-                      );
+                      if (attribute.id === "Size") {
+                        return (
+                          <button
+                            onClick={() => this.handleButtonClick(item.id)}
+                            className={
+                              this.props.activeSize.includes(item.id)
+                                ? "size-btn active"
+                                : "size-btn"
+                            }
+                            key={index}
+                          >
+                            {item.value}
+                          </button>
+                        );
+                      } else if (attribute.id === "Capacity") {
+                        return (
+                          <button
+                            onClick={() => this.handleButtonClick_2(item.id)}
+                            className={
+                              this.props.activeCapacity.includes(item.id)
+                                ? "size-btn active"
+                                : "size-btn"
+                            }
+                            key={index}
+                          >
+                            {item.value}
+                          </button>
+                        );
+                      } else if (attribute.id === "With USB 3 ports") {
+                        return (
+                          <button
+                            onClick={() => this.handleButtonClick_3(item.id)}
+                            className={
+                              this.props.activeImac_1.includes(item.id)
+                                ? "size-btn active"
+                                : "size-btn"
+                            }
+                            key={index}
+                          >
+                            {item.value}
+                          </button>
+                        );
+                      } else if (attribute.id === "Touch ID in keyboard") {
+                        return (
+                          <button
+                            onClick={() => this.handleButtonClick_4(item.id)}
+                            className={
+                              this.props.activeImac_2.includes(item.id)
+                                ? "size-btn active"
+                                : "size-btn"
+                            }
+                            key={index}
+                          >
+                            {item.value}
+                          </button>
+                        );
+                      }
                     })}
                   </>
                 );
@@ -168,7 +240,10 @@ export default class Products extends Component {
                 );
               }
             })}
-            {this.state.product.inStock ? (
+
+            {this.state.product.inStock &&
+            (this.props.activeSize.length >= 1 ||
+              this.props.activeCapacity.length >= 1) ? (
               <button
                 className="cart-btn"
                 onClick={() => this.props.handleAddToCart(this.state.product)}

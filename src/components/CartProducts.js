@@ -46,12 +46,61 @@ export default class CartProducts extends Component {
                     <h4 className="mb" key={index}>
                       {attribute.name}:
                     </h4>
+                    {/* eslint-disable-next-line */}
                     {attribute.items.map((item, index) => {
-                      return (
-                        <button className="size-btn" key={index}>
-                          {item.value}
-                        </button>
-                      );
+                      if (attribute.id === "Size") {
+                        return (
+                          <button
+                            className={
+                              this.props.activeSize.includes(item.id)
+                                ? "size-btn active"
+                                : "size-btn"
+                            }
+                            key={index}
+                          >
+                            {item.value}
+                          </button>
+                        );
+                      } else if (attribute.id === "Capacity") {
+                        return (
+                          <button
+                            className={
+                              this.props.activeCapacity.includes(item.id)
+                                ? "size-btn active"
+                                : "size-btn"
+                            }
+                            key={index}
+                          >
+                            {item.value}
+                          </button>
+                        );
+                      } else if (attribute.id === "With USB 3 ports") {
+                        return (
+                          <button
+                            className={
+                              this.props.activeImac_1.includes(item.id)
+                                ? "size-btn active"
+                                : "size-btn"
+                            }
+                            key={index}
+                          >
+                            {item.value}
+                          </button>
+                        );
+                      } else if (attribute.id === "Touch ID in keyboard") {
+                        return (
+                          <button
+                            className={
+                              this.props.activeImac_2.includes(item.id)
+                                ? "size-btn active"
+                                : "size-btn"
+                            }
+                            key={index}
+                          >
+                            {item.value}
+                          </button>
+                        );
+                      }
                     })}
                   </>
                 );

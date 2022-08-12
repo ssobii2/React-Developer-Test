@@ -65,8 +65,20 @@ class App extends Component {
     this.setState({ cart: this.state.cart });
   };
 
-  setActive = (active) => {
-    this.setState({ active });
+  setActiveSize = (activeSize) => {
+    this.setState({ activeSize: activeSize });
+  }
+
+  setActiveCapacity = (activeCapacity) => {
+    this.setState({ activeCapacity: activeCapacity });
+  }
+
+  setActiveImac_1 = (activeImac_1) => {
+    this.setState({ activeImac_1: activeImac_1 });
+  }
+
+  setActiveImac_2 = (activeImac_2) => {
+    this.setState({ activeImac_2: activeImac_2 });
   }
 
   constructor(props) {
@@ -74,7 +86,10 @@ class App extends Component {
     this.state = {
       currentCurrency: "$",
       cart: [],
-      active: [],
+      activeSize: [],
+      activeCapacity: [],
+      activeImac_1: [],
+      activeImac_2: [],
     };
   }
 
@@ -89,7 +104,10 @@ class App extends Component {
             cart={this.state.cart}
             minusButton={this.minusButton}
             plusButton={this.plusButton}
-            active={this.state.active}
+            activeSize={this.state.activeSize}
+            activeCapacity={this.state.activeCapacity}
+            activeImac_1={this.state.activeImac_1}
+            activeImac_2={this.state.activeImac_2}
           />
           <Routes>
             <Route
@@ -108,8 +126,14 @@ class App extends Component {
                   currentCurrency={this.state.currentCurrency}
                   client={this.props.client}
                   handleAddToCart={this.handleAddToCart}
-                  active={this.state.active}
-                  setActive={this.setActive}
+                  activeSize={this.state.activeSize}
+                  activeCapacity={this.state.activeCapacity}
+                  activeImac_1={this.state.activeImac_1}
+                  activeImac_2={this.state.activeImac_2}
+                  setActiveSize={this.setActiveSize}
+                  setActiveCapacity={this.setActiveCapacity}
+                  setActiveImac_1={this.setActiveImac_1}
+                  setActiveImac_2={this.setActiveImac_2}
                 />
               }
             />
@@ -121,7 +145,10 @@ class App extends Component {
                   currentCurrency={this.state.currentCurrency}
                   minusButton={this.minusButton}
                   plusButton={this.plusButton}
-                  active={this.state.active}
+                  activeSize={this.state.activeSize}
+                  activeCapacity={this.state.activeCapacity}
+                  activeImac_1={this.state.activeImac_1}
+                  activeImac_2={this.state.activeImac_2}
                 />
               }
             />

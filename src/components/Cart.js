@@ -24,14 +24,22 @@ export default class Cart extends Component {
       });
     });
     let tax = total * 0.21;
-    total = total + tax;
     return (
       <div className="cart">
         <h2>CART</h2>
         <hr className="solid" />
         <div className="cart-products">
           {this.props.cart.map((product, index) => (
-            <CartProducts product={product} key={index}/>
+            <CartProducts
+              product={product}
+              key={index}
+              minusButton={this.props.minusButton}
+              plusButton={this.props.plusButton}
+              activeSize={this.props.activeSize}
+              activeCapacity={this.props.activeCapacity}
+              activeImac_1={this.props.activeImac_1}
+              activeImac_2={this.props.activeImac_2}
+            />
           ))}
         </div>
         <div className="total">

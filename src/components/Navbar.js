@@ -94,8 +94,6 @@ export default class Navbar extends Component {
         }
       });
     });
-    let tax = total * 0.21;
-    total = total + tax;
 
     return (
       <nav className="nav-bar">
@@ -192,12 +190,73 @@ export default class Navbar extends Component {
                                   <p className="mb" key={index}>
                                     {attribute.name}:
                                   </p>
+                                  {/* eslint-disable-next-line */}
                                   {attribute.items.map((item, index) => {
-                                    return (
-                                      <button className="sz-btn" key={index}>
-                                        {item.value}
-                                      </button>
-                                    );
+                                    if (attribute.id === "Size") {
+                                      return (
+                                        <button
+                                          className={
+                                            this.props.activeSize.includes(
+                                              item.id
+                                            )
+                                              ? "sz-btn active"
+                                              : "sz-btn"
+                                          }
+                                          key={index}
+                                        >
+                                          {item.value}
+                                        </button>
+                                      );
+                                    } else if (attribute.id === "Capacity") {
+                                      return (
+                                        <button
+                                          className={
+                                            this.props.activeCapacity.includes(
+                                              item.id
+                                            )
+                                              ? "sz-btn active"
+                                              : "sz-btn"
+                                          }
+                                          key={index}
+                                        >
+                                          {item.value}
+                                        </button>
+                                      );
+                                    } else if (
+                                      attribute.id === "With USB 3 ports"
+                                    ) {
+                                      return (
+                                        <button
+                                          className={
+                                            this.props.activeImac_1.includes(
+                                              item.id
+                                            )
+                                              ? "sz-btn active"
+                                              : "sz-btn"
+                                          }
+                                          key={index}
+                                        >
+                                          {item.value}
+                                        </button>
+                                      );
+                                    } else if (
+                                      attribute.id === "Touch ID in keyboard"
+                                    ) {
+                                      return (
+                                        <button
+                                          className={
+                                            this.props.activeImac_2.includes(
+                                              item.id
+                                            )
+                                              ? "sz-btn active"
+                                              : "sz-btn"
+                                          }
+                                          key={index}
+                                        >
+                                          {item.value}
+                                        </button>
+                                      );
+                                    }
                                   })}
                                 </>
                               );
