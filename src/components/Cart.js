@@ -6,9 +6,9 @@ export default class Cart extends Component {
     let total = 0;
     this.props.cart.forEach((product) => {
       /* eslint-disable-next-line */
-      product.prices.map((price) => {
-        if (price.currency.symbol === this.props.currentCurrency) {
-          total += product.quantityPrice;
+      product.quantityPrice.forEach((price) => {
+        if (price.currencySymbol === this.props.currentCurrency) {
+          total += price.price * product.quantity;
         }
       });
     });
@@ -26,12 +26,6 @@ export default class Cart extends Component {
               minusButton={this.props.minusButton}
               plusButton={this.props.plusButton}
               color={this.props.color}
-              activeSize_1={this.props.activeSize_1}
-              activeSize_2={this.props.activeSize_2}
-              activeCapacity_1={this.props.activeCapacity_1}
-              activeCapacity_2={this.props.activeCapacity_2}
-              activeImac_1={this.props.activeImac_1}
-              activeImac_2={this.props.activeImac_2}
             />
           ))}
         </div>

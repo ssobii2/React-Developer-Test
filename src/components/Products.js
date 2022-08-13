@@ -21,60 +21,6 @@ export default class Products extends Component {
     }
   };
 
-  handleButtonClickSize_1 = (id) => {
-    if (this.props.activeSize_1.includes(id)) {
-      this.props.activeSize_1.splice(this.props.activeSize_1.indexOf(id), 1);
-    } else {
-      this.props.setActiveSize_1(id);
-    }
-  };
-
-  handleButtonClickSize_2 = (id) => {
-    if (this.props.activeSize_2.includes(id)) {
-      this.props.activeSize_2.splice(this.props.activeSize_2.indexOf(id), 1);
-    } else {
-      this.props.setActiveSize_2(id);
-    }
-  };
-
-  handleButtonClickCapacity_1 = (id) => {
-    if (this.props.activeCapacity_1.includes(id)) {
-      this.props.activeCapacity_1.splice(
-        this.props.activeCapacity_1.indexOf(id),
-        1
-      );
-    } else {
-      this.props.setActiveCapacity_1(id);
-    }
-  };
-
-  handleButtonClickCapacity_2 = (id) => {
-    if (this.props.activeCapacity_2.includes(id)) {
-      this.props.activeCapacity_2.splice(
-        this.props.activeCapacity_2.indexOf(id),
-        1
-      );
-    } else {
-      this.props.setActiveCapacity_2(id);
-    }
-  };
-
-  handleButtonClick_3 = (id) => {
-    if (this.props.activeImac_1.includes(id)) {
-      this.props.activeImac_1.splice(this.props.activeImac_1.indexOf(id), 1);
-    } else {
-      this.props.setActiveImac_1(id);
-    }
-  };
-
-  handleButtonClick_4 = (id) => {
-    if (this.props.activeImac_2.includes(id)) {
-      this.props.activeImac_2.splice(this.props.activeImac_2.indexOf(id), 1);
-    } else {
-      this.props.setActiveImac_2(id);
-    }
-  };
-
   getProduct = (id) => {
     this.props.client
       .query({
@@ -130,6 +76,13 @@ export default class Products extends Component {
   componentDidMount() {
     let id = window.location.pathname.slice(9, window.location.pathname.length);
     this.getProduct(id);
+
+    this.setState(prevState => ({
+      product: {
+        ...prevState.product,
+        selectedAttributes: [],
+      }
+    }))
   }
 
   render() {
@@ -167,110 +120,12 @@ export default class Products extends Component {
                     <h4 className="margin" key={index}>
                       {attribute.name}:
                     </h4>
-                    {/* eslint-disable-next-line */}
                     {attribute.items.map((item, index) => {
-                      if (attribute.id === "Size") {
-                        if (item.value === "S" || "M" || "L" || "XL") {
-                          return (
-                            <button
-                              onClick={() =>
-                                this.handleButtonClickSize_1(item.id)
-                              }
-                              className={
-                                this.props.activeSize_1.includes(item.id)
-                                  ? "size-btn active"
-                                  : "size-btn"
-                              }
-                              key={index}
-                            >
-                              {item.value}
-                            </button>
-                          );
-                        } else if (
-                          item.value === "40" ||
-                          "41" ||
-                          "42" ||
-                          "43"
-                        ) {
-                          return (
-                            <button
-                              onClick={() =>
-                                this.handleButtonClickSize_2(item.id)
-                              }
-                              className={
-                                this.props.activeSize_2.includes(item.id)
-                                  ? "size-btn active"
-                                  : "size-btn"
-                              }
-                              key={index}
-                            >
-                              {item.value}
-                            </button>
-                          );
-                        }
-                      } else if (attribute.id === "Capacity") {
-                        if (item.value === "512G" || "1T") {
-                          return (
-                            <button
-                              onClick={() =>
-                                this.handleButtonClickCapacity_1(item.id)
-                              }
-                              className={
-                                this.props.activeCapacity_1.includes(item.id)
-                                  ? "size-btn active"
-                                  : "size-btn"
-                              }
-                              key={index}
-                            >
-                              {item.value}
-                            </button>
-                          );
-                        } else if (item.value === "256GB" || "512GB") {
-                          return (
-                            <button
-                              onClick={() =>
-                                this.handleButtonClickCapacity_2(item.id)
-                              }
-                              className={
-                                this.props.activeCapacity_2.includes(item.id)
-                                  ? "size-btn active"
-                                  : "size-btn"
-                              }
-                              key={index}
-                            >
-                              {item.value}
-                            </button>
-                          );
-                        }
-                      } else if (attribute.id === "With USB 3 ports") {
-                        return (
-                          <button
-                            onClick={() => this.handleButtonClick_3(item.id)}
-                            className={
-                              this.props.activeImac_1.includes(item.id)
-                                ? "size-btn active"
-                                : "size-btn"
-                            }
-                            key={index}
-                          >
-                            {item.value}
-                          </button>
-                        );
-                      } else if (attribute.id === "Touch ID in keyboard") {
-                        return (
-                          <button
-                            onClick={() => this.handleButtonClick_4(item.id)}
-                            className={
-                              this.props.activeImac_2.includes(item.id)
-                                ? "size-btn active"
-                                : "size-btn"
-                            }
-                            key={index}
-                          >
-                            {item.value}
-                          </button>
-                        );
-                      }
+                      return (
+                        <button className="size-btn" key={index}>
+                          {item.value}
+                        </button>
+                      );
                     })}
                   </>
                 );
@@ -319,12 +174,7 @@ export default class Products extends Component {
               }
             })}
 
-            {this.state.product.inStock &&
-            (this.props.activeSize_1.length >= 1 ||
-              this.props.activeSize_2.length >= 1 ||
-              this.props.activeCapacity_1.length >= 1 ||
-              this.props.activeCapacity_2.length >= 1 ||
-              this.props.color.length >= 1) ? (
+            {this.state.product.inStock ? (
               <button
                 className="cart-btn"
                 onClick={() => this.props.handleAddToCart(this.state.product)}

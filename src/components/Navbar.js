@@ -81,9 +81,9 @@ export default class Navbar extends Component {
     let total = 0;
     this.props.cart.forEach((product) => {
       /* eslint-disable-next-line */
-      product.prices.map((price) => {
-        if (price.currency.symbol === this.props.currentCurrency) {
-          total += product.quantityPrice;
+      product.quantityPrice.forEach((price) => {
+        if (price.currencySymbol === this.props.currentCurrency) {
+          total += price.price * product.quantity;
         }
       });
     });
@@ -185,118 +185,11 @@ export default class Navbar extends Component {
                                   </p>
                                   {/* eslint-disable-next-line */}
                                   {attribute.items.map((item, index) => {
-                                    if (attribute.id === "Size") {
-                                      if (
-                                        item.value === "S" ||
-                                        "M" ||
-                                        "L" ||
-                                        "XL"
-                                      ) {
-                                        return (
-                                          <button
-                                            className={
-                                              this.props.activeSize_1.includes(
-                                                item.id
-                                              )
-                                                ? "sz-btn active"
-                                                : "sz-btn"
-                                            }
-                                            key={index}
-                                          >
-                                            {item.value}
-                                          </button>
-                                        );
-                                      } else if (
-                                        item.value === "40" ||
-                                        "41" ||
-                                        "42" ||
-                                        "43"
-                                      ) {
-                                        return (
-                                          <button
-                                            className={
-                                              this.props.activeSize_2.includes(
-                                                item.id
-                                              )
-                                                ? "sz-btn active"
-                                                : "sz-btn"
-                                            }
-                                            key={index}
-                                          >
-                                            {item.value}
-                                          </button>
-                                        );
-                                      }
-                                    } else if (attribute.id === "Capacity") {
-                                      if (item.value === "512G" || "1T") {
-                                        return (
-                                          <button
-                                            className={
-                                              this.props.activeCapacity_1.includes(
-                                                item.id
-                                              )
-                                                ? "sz-btn active"
-                                                : "sz-btn"
-                                            }
-                                            key={index}
-                                          >
-                                            {item.value}
-                                          </button>
-                                        );
-                                      } else if (
-                                        item.value === "256GB" ||
-                                        "512GB"
-                                      ) {
-                                        return (
-                                          <button
-                                            className={
-                                              this.props.activeCapacity_2.includes(
-                                                item.id
-                                              )
-                                                ? "sz-btn active"
-                                                : "sz-btn"
-                                            }
-                                            key={index}
-                                          >
-                                            {item.value}
-                                          </button>
-                                        );
-                                      }
-                                    } else if (
-                                      attribute.id === "With USB 3 ports"
-                                    ) {
-                                      return (
-                                        <button
-                                          className={
-                                            this.props.activeImac_1.includes(
-                                              item.id
-                                            )
-                                              ? "sz-btn active"
-                                              : "sz-btn"
-                                          }
-                                          key={index}
-                                        >
-                                          {item.value}
-                                        </button>
-                                      );
-                                    } else if (
-                                      attribute.id === "Touch ID in keyboard"
-                                    ) {
-                                      return (
-                                        <button
-                                          className={
-                                            this.props.activeImac_2.includes(
-                                              item.id
-                                            )
-                                              ? "sz-btn active"
-                                              : "sz-btn"
-                                          }
-                                          key={index}
-                                        >
-                                          {item.value}
-                                        </button>
-                                      );
-                                    }
+                                    return (
+                                      <button className="sz-btn" key={index}>
+                                        {item.value}
+                                      </button>
+                                    );
                                   })}
                                 </>
                               );

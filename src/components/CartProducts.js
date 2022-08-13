@@ -48,94 +48,11 @@ export default class CartProducts extends Component {
                     </h4>
                     {/* eslint-disable-next-line */}
                     {attribute.items.map((item, index) => {
-                      if (attribute.id === "Size") {
-                        if (item.value === "S" || "M" || "L" || "XL") {
-                          return (
-                            <button
-                              className={
-                                this.props.activeSize_1.includes(item.id)
-                                  ? "size-btn active"
-                                  : "size-btn"
-                              }
-                              key={index}
-                            >
-                              {item.value}
-                            </button>
-                          );
-                        } else if (
-                          item.value === "40" ||
-                          "41" ||
-                          "42" ||
-                          "43"
-                        ) {
-                          return (
-                            <button
-                              className={
-                                this.props.activeSize_2.includes(item.id)
-                                  ? "size-btn active"
-                                  : "size-btn"
-                              }
-                              key={index}
-                            >
-                              {item.value}
-                            </button>
-                          );
-                        }
-                      } else if (attribute.id === "Capacity") {
-                        if (item.value === "512G" || "1T") {
-                          return (
-                            <button
-                              className={
-                                this.props.activeCapacity_1.includes(item.id)
-                                  ? "size-btn active"
-                                  : "size-btn"
-                              }
-                              key={index}
-                            >
-                              {item.value}
-                            </button>
-                          );
-                        } else if (item.value === "256GB" || "512GB") {
-                          return (
-                            <button
-                              className={
-                                this.props.activeCapacity_2.includes(item.id)
-                                  ? "size-btn active"
-                                  : "size-btn"
-                              }
-                              key={index}
-                            >
-                              {item.value}
-                            </button>
-                          );
-                        }
-                      } else if (attribute.id === "With USB 3 ports") {
-                        return (
-                          <button
-                            className={
-                              this.props.activeImac_1.includes(item.id)
-                                ? "size-btn active"
-                                : "size-btn"
-                            }
-                            key={index}
-                          >
-                            {item.value}
-                          </button>
-                        );
-                      } else if (attribute.id === "Touch ID in keyboard") {
-                        return (
-                          <button
-                            className={
-                              this.props.activeImac_2.includes(item.id)
-                                ? "size-btn active"
-                                : "size-btn"
-                            }
-                            key={index}
-                          >
-                            {item.value}
-                          </button>
-                        );
-                      }
+                      return (
+                        <button className="size-btn" key={index}>
+                          {item.value}
+                        </button>
+                      );
                     })}
                   </>
                 );
