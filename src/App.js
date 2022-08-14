@@ -10,6 +10,7 @@ import Tech from "./components/Tech";
 
 class App extends Component {
   plusButton = (id) => {
+    localStorage.getItem("cart")
     const existingProduct = this.state.cart.find((item) => item.id === id);
     if (existingProduct) {
       existingProduct.quantity += 1;
@@ -20,9 +21,11 @@ class App extends Component {
       });
     }
     this.setState({ cart: this.state.cart });
+    localStorage.setItem("cart", JSON.stringify(this.state.cart));
   };
 
   minusButton = (id) => {
+    localStorage.getItem("cart");
     const existingProduct = this.state.cart.find((item) => item.id === id);
     if (existingProduct) {
       existingProduct.quantity = Math.max(0, existingProduct.quantity - 1);
@@ -32,12 +35,14 @@ class App extends Component {
         }
       });
       this.setState({ cart: this.state.cart });
+      localStorage.setItem("cart", JSON.stringify(this.state.cart));
     }
     if (existingProduct.quantity === 0) {
       const remainingProducts = this.state.cart.filter(
         (item) => item.id !== id
       );
       this.setState({ cart: remainingProducts });
+      localStorage.setItem("cart", JSON.stringify(remainingProducts));
     }
   };
 
@@ -64,7 +69,6 @@ class App extends Component {
       });
     }
     this.setState({ cart: this.state.cart });
-
     localStorage.setItem("cart", JSON.stringify(this.state.cart));
   };
 

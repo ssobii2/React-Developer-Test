@@ -193,7 +193,9 @@ export default class Products extends Component {
               }
             })}
 
-            {this.state.product.inStock && (this.state.product.selectedAttributes || this.state.product.selectedColor) ? (
+            {this.state.product.inStock &&
+            (this.state.product.selectedAttributes ||
+              this.state.product.selectedColor) ? (
               <button
                 className="cart-btn"
                 onClick={() => this.props.handleAddToCart(this.state.product)}

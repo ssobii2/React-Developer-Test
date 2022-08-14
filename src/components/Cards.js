@@ -3,17 +3,7 @@ import { Link } from "react-router-dom";
 import Circle from "../images/circle.svg";
 
 export default class Cards extends Component {
-  // componentDidMount() {
-  //   this.setState((prevState) => ({
-  //     product: {
-  //       ...prevState.product,
-  //       defaultAttributes: "",
-  //     }
-  //   }))
-  // }
-  
   render() {
-    // console.log(this.props.product.defaultAttributes);
     const style = this.props.product.inStock ? "" : "in-stock";
     const style2 = this.props.product.inStock ? "" : "text-overlay";
 

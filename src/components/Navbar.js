@@ -159,8 +159,8 @@ export default class Navbar extends Component {
                   {/* eslint-disable-next-line */}
                   {this.props.cart.map((product, index) => (
                     <>
-                      <div className="cart-product">
-                        <div className="info-width" key={index}>
+                      <div key={index} className="cart-product">
+                        <div className="info-width">
                           <p>{product.name}</p>
                           <h3 className="mb">
                             {/* eslint-disable-next-line */}

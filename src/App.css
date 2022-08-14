@@ -11,7 +11,7 @@
 .nav-bar {
   display: flex;
   width: 100%;
-  height: 80px;
+  height: 5rem;
   justify-content: space-between;
 }
 
@@ -27,8 +27,8 @@ a {
 }
 
 .nav-items a {
-  margin-left: 40px;
-  padding-bottom: 20px;
+  margin-left: 2.5rem;
+  padding-bottom: 1.25rem;
 }
 
 .link-active {
@@ -41,14 +41,14 @@ a {
 .logo {
   display: flex;
   align-items: center;
-  margin-right: 50px;
+  margin-right: 3.125rem;
 }
 
 .actions {
   display: flex;
   position: relative;
   align-items: center;
-  margin-right: 50px;
+  margin-right: 3.125rem;
 }
 
 .dropdown-button {
@@ -58,16 +58,16 @@ a {
 }
 
 .dropdown-button p {
-  width: 12px;
-  height: 29px;
+  width: 0.75rem;
+  height: 1.813rem;
   font-weight: 600;
-  font-size: 20px;
-  margin-right: 15px;
+  font-size: 1.25rem;
+  margin-right: 1rem;
 }
 
 .dropdown-content p {
   color: black;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -76,7 +76,7 @@ a {
 
 .dropdown-content {
   position: absolute;
-  min-width: 100px;
+  min-width: 6.25rem;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   background: #fff;
@@ -84,7 +84,7 @@ a {
 
 .dropdown-content-2 {
   position: absolute;
-  min-width: 100px;
+  min-width: 6.25rem;
   background-color: #fff;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 2;
@@ -92,9 +92,9 @@ a {
 }
 
 .margin-p {
-  margin-left: 20px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-left: 1.25rem;
+  margin-top: 1.875rem;
+  margin-bottom: 1.875rem;
 }
 
 .dropdown {
@@ -131,35 +131,35 @@ a {
 }
 
 .cart {
-  margin-left: 40px;
-  margin-top: 20px;
+  margin-left: 2.5rem;
+  margin-top: 1.25rem;
 }
 
 .badge {
   background-color: black;
   color: white;
-  border-radius: 60px;
+  border-radius: 3.75rem;
   position: relative;
   top: -30px;
   right: -55px;
-  width: 20px;
-  height: 20px;
+  width: 1.25rem;
+  height: 1.25rem;
   text-align: center;
 }
 
 .category h2 {
-  margin-left: 40px;
-  margin-bottom: 50px;
-  margin-top: 30px;
+  margin-left: 2.5rem;
+  margin-bottom: 3.125rem;
+  margin-top: 1.875rem;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 50px;
-  margin-left: 40px;
-  margin-bottom: 150px;
-  margin-right: 40px;
+  grid-gap: 3.125rem;
+  margin-left: 3.125rem;
+  margin-bottom: 9.375rem;
+  margin-right: 2.5rem;
   justify-content: center;
 }
 
@@ -171,12 +171,12 @@ a {
 }
 
 .cards img {
-  margin-bottom: 10px;
-  margin-top: 20px;
+  margin-bottom: 0.625rem;
+  margin-top: 1.25rem;
 }
 
 .cards p {
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
   text-align: left;
 }
 
@@ -200,13 +200,13 @@ a {
   top: 44.24%;
   bottom: 43.94%;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 1.5rem;
   color: #8d8f9a;
 }
 
 .circle {
   position: absolute;
-  right: 10px;
+  right: 0.625rem;
   bottom: -36px;
   display: none;
   cursor: pointer;
@@ -222,32 +222,32 @@ a {
 
 .products {
   display: flex;
-  margin-bottom: 150px;
+  margin-bottom: 9.375rem;
 }
 
 .sm-images {
   display: flex;
   flex-direction: column;
-  margin-left: 40px;
-  margin-top: 30px;
+  margin-left: 2.5rem;
+  margin-top: 1.875rem;
 }
 
 .sm-images img {
-  margin-bottom: 25px;
+  margin-bottom: 1.563rem;
 }
 
 .content {
   display: flex;
-  margin-top: 30px;
-  margin-left: 40px;
+  margin-top: 1.875rem;
+  margin-left: 2.5rem;
 }
 
 .big-img {
-  margin-right: 80px;
+  margin-right: 5rem;
 }
 
 .info {
-  width: 300px;
+  width: 18.75rem;
 }
 
 .info-cart {
@@ -255,16 +255,16 @@ a {
 }
 
 .info-width {
-  width: 150px;
-  margin-left: 20px;
+  width: 9.375rem;
+  margin-left: 1.25rem;
 }
 
 .size-btn {
-  width: 63px;
-  height: 45px;
+  width: 3.938rem;
+  height: 2.813rem;
   border: 1px solid #1d1f22;
   background-color: white;
-  margin-right: 10px;
+  margin-right: 0.625rem;
   cursor: pointer;
 }
 
@@ -274,11 +274,11 @@ a {
 }
 
 .sz-btn {
-  width: 44px;
-  height: 24px;
+  width: 2.75rem;
+  height: 1.5rem;
   border: 1px solid #1d1f22;
   background-color: white;
-  margin-right: 5px;
+  margin-right: 0.313rem;
   cursor: pointer;
 }
 
@@ -287,9 +287,9 @@ a {
 }
 
 .boxes-div {
-  width: 36px;
-  height: 36px;
-  margin-right: 5px;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-right: 0.313rem;
   border: 1px solid #5ece7b;
   cursor: pointer;
 }
@@ -299,18 +299,18 @@ a {
 }
 
 .boxes-2 div {
-  width: 16px;
-  height: 16px;
+  width: 1rem;
+  height: 1rem;
 }
 
 .cart-btn {
   background-color: #5ece7b;
-  width: 292px;
-  height: 52px;
+  width: 18.25rem;
+  height: 3.25rem;
   border: none;
   color: white;
   cursor: pointer;
-  margin-top: 30px;
+  margin-top: 1.875rem;
 }
 
 .disable {
@@ -320,7 +320,7 @@ a {
 }
 
 .margin {
-  margin-top: 30px;
+  margin-top: 1.875rem;
 }
 
 .solid {
@@ -329,7 +329,7 @@ a {
 }
 
 .mb {
-  margin-top: 10px;
+  margin-top: 0.625rem;
 }
 
 .cart-products {
@@ -341,29 +341,29 @@ a {
 }
 
 .cart h2 {
-  margin-top: 30px;
-  margin-bottom: 40px;
+  margin-top: 1.875rem;
+  margin-bottom: 2.5rem;
 }
 
 .cart hr {
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-bottom: 1.25rem;
+  margin-top: 1.25rem;
 }
 
 .minus-plus-btn {
-  margin-right: 60px;
+  margin-right: 3.75rem;
   display: flex;
 }
 
 .mp-btn {
-  margin-right: 20px;
-  margin-bottom: 30px;
+  margin-right: 1.25rem;
+  margin-bottom: 1.875rem;
   display: flex;
 }
 
 .minus-plus-btn button {
-  width: 45px;
-  height: 45px;
+  width: 2.813rem;
+  height: 2.813rem;
   border: 1px solid #1d1f22;
   background-color: white;
 }
@@ -400,16 +400,16 @@ a {
 }
 
 .total {
-  margin-bottom: 150px;
+  margin-bottom: 9.375rem;
 }
 
 .total p {
-  margin-bottom: 5px;
+  margin-bottom: 0.313rem;
 }
 
 .mini-cart button {
-  margin-left: 20px;
-  margin-top: 20px;
+  margin-left: 1.25rem;
+  margin-top: 1.25rem;
 }
 
 .mini-cart div {
@@ -421,7 +421,19 @@ a {
   cursor: pointer;
   border: 1px solid #1d1f22;
   background-color: white;
-  width: 140px;
-  height: 43px;
-  margin-bottom: 30px;
+  width: 8.75rem;
+  height: 2.688rem;
+  margin-bottom: 1.875rem;
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3.125rem;
+    margin-left: 3.125rem;
+    margin-bottom: 9.375rem;
+    margin-right: 2.5rem;
+    justify-content: center;
+  }
 }
