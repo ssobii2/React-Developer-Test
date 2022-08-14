@@ -62,6 +62,8 @@ export default class Navbar extends Component {
   componentDidMount() {
     document.addEventListener("mousedown", this.handleClickOutside);
     this.getCurrencies();
+
+    localStorage.getItem("cart") && this.props.setCart(JSON.parse(localStorage.getItem("cart")));
   }
 
   componentWillUnmount() {
@@ -186,7 +188,14 @@ export default class Navbar extends Component {
                                   {/* eslint-disable-next-line */}
                                   {attribute.items.map((item, index) => {
                                     return (
-                                      <button className="sz-btn" key={index}>
+                                      <button
+                                        className={
+                                          product.selectedAttributes === item.id
+                                            ? "sz-btn active"
+                                            : "sz-btn"
+                                        }
+                                        key={index}
+                                      >
                                         {item.value}
                                       </button>
                                     );
@@ -208,7 +217,7 @@ export default class Navbar extends Component {
                                       return (
                                         <div
                                           className={
-                                            this.props.color.includes(item.id)
+                                            product.selectedColor === item.id
                                               ? "boxes-div active-color"
                                               : "boxes-div"
                                           }

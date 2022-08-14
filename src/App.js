@@ -64,10 +64,12 @@ class App extends Component {
       });
     }
     this.setState({ cart: this.state.cart });
+
+    localStorage.setItem("cart", JSON.stringify(this.state.cart));
   };
 
-  setColor = (color) => {
-    this.setState({ color: color });
+  setCart = (cart) => {
+    this.setState({ cart });
   };
 
   constructor(props) {
@@ -75,7 +77,6 @@ class App extends Component {
     this.state = {
       currentCurrency: "$",
       cart: [],
-      color: [],
     };
   }
 
@@ -90,7 +91,7 @@ class App extends Component {
             cart={this.state.cart}
             minusButton={this.minusButton}
             plusButton={this.plusButton}
-            color={this.state.color}
+            setCart={this.setCart}
           />
           <Routes>
             <Route
@@ -109,8 +110,6 @@ class App extends Component {
                   currentCurrency={this.state.currentCurrency}
                   client={this.props.client}
                   handleAddToCart={this.handleAddToCart}
-                  color={this.state.color}
-                  setColor={this.setColor}
                 />
               }
             />
@@ -122,14 +121,27 @@ class App extends Component {
                   currentCurrency={this.state.currentCurrency}
                   minusButton={this.minusButton}
                   plusButton={this.plusButton}
-                  color={this.state.color}
+                  setCart={this.setCart}
                 />
               }
             />
-            <Route path="/tech" element={<Tech client={this.props.client} />} />
+            <Route
+              path="/tech"
+              element={
+                <Tech
+                  client={this.props.client}
+                  currentCurrency={this.state.currentCurrency}
+                />
+              }
+            />
             <Route
               path="/clothes"
-              element={<Clothes client={this.props.client} />}
+              element={
+                <Clothes
+                  client={this.props.client}
+                  currentCurrency={this.state.currentCurrency}
+                />
+              }
             />
           </Routes>
         </div>

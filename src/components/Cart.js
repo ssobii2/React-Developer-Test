@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import CartProducts from "./CartProducts";
 
 export default class Cart extends Component {
+  componentDidMount() {
+    localStorage.getItem("cart") && this.props.setCart(JSON.parse(localStorage.getItem("cart")));
+  }
+  
   render() {
     let total = 0;
     this.props.cart.forEach((product) => {
@@ -25,7 +29,7 @@ export default class Cart extends Component {
               key={index}
               minusButton={this.props.minusButton}
               plusButton={this.props.plusButton}
-              color={this.props.color}
+              currentCurrency={this.props.currentCurrency}
             />
           ))}
         </div>

@@ -7,52 +7,54 @@ export default class Category extends Component {
     super(props);
     this.state = {
       products: [],
-      category : ""
-    }
+      category: "",
+    };
   }
 
   getAllCategories = () => {
-    this.props.client.query({
-      query: gql`
-      {
-        category(input: { title: "all" }) {
-          name
-          products {
-            id
-            name
-            inStock
-            gallery
-            description
-            category
-            attributes {
-              id
+    this.props.client
+      .query({
+        query: gql`
+          {
+            category(input: { title: "all" }) {
               name
-              type
-              items {
-                displayValue
-                value
+              products {
                 id
+                name
+                inStock
+                gallery
+                description
+                category
+                attributes {
+                  id
+                  name
+                  type
+                  items {
+                    displayValue
+                    value
+                    id
+                  }
+                }
+                prices {
+                  currency {
+                    label
+                    symbol
+                  }
+                  amount
+                }
+                brand
               }
             }
-            prices {
-              currency {
-                label
-                symbol
-              }
-              amount
-            }
-            brand
           }
-        }
-      }
-      `,
-    }).then((result) => {
-      this.setState({
-        products: result.data.category.products,
-        category: result.data.category.name
+        `,
+      })
+      .then((result) => {
+        this.setState({
+          products: result.data.category.products,
+          category: result.data.category.name,
+        });
       });
-    });
-  }
+  };
 
   componentDidMount() {
     this.getAllCategories();
@@ -64,7 +66,13 @@ export default class Category extends Component {
         <h2>{this.state.category.toUpperCase()}</h2>
         <div className="grid">
           {this.state.products.map((product) => {
-            return <Cards key={product.id} product={product} currentCurrency={this.props.currentCurrency} />;
+            return (
+              <Cards
+                key={product.id}
+                product={product}
+                currentCurrency={this.props.currentCurrency}
+              />
+            );
           })}
         </div>
       </div>

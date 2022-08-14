@@ -49,7 +49,14 @@ export default class CartProducts extends Component {
                     {/* eslint-disable-next-line */}
                     {attribute.items.map((item, index) => {
                       return (
-                        <button className="size-btn" key={index}>
+                        <button
+                          className={
+                            this.props.product.selectedAttributes === item.id
+                              ? "size-btn active"
+                              : "size-btn"
+                          }
+                          key={index}
+                        >
                           {item.value}
                         </button>
                       );
@@ -71,7 +78,7 @@ export default class CartProducts extends Component {
                         return (
                           <div
                             className={
-                              this.props.color.includes(item.id)
+                              this.props.product.selectedColor === item.id
                                 ? "boxes-div active-color"
                                 : "boxes-div"
                             }

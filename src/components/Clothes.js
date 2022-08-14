@@ -1,19 +1,20 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import { gql } from "@apollo/client";
 import Cards from "./Cards";
 
 export default class Clothes extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          products: [],
-          category : ""
-        }
-      }
-    
-      getAllCategories = () => {
-        this.props.client.query({
-          query: gql`
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: [],
+      category: "",
+    };
+  }
+
+  getAllCategories = () => {
+    this.props.client
+      .query({
+        query: gql`
           {
             category(input: { title: "clothes" }) {
               name
@@ -45,29 +46,36 @@ export default class Clothes extends Component {
               }
             }
           }
-          `,
-        }).then((result) => {
-          this.setState({
-            products: result.data.category.products,
-            category: result.data.category.name
-          });
+        `,
+      })
+      .then((result) => {
+        this.setState({
+          products: result.data.category.products,
+          category: result.data.category.name,
         });
-      }
-    
-      componentDidMount() {
-        this.getAllCategories();
-      }
+      });
+  };
+
+  componentDidMount() {
+    this.getAllCategories();
+  }
 
   render() {
     return (
-        <div className="category">
+      <div className="category">
         <h2>{this.state.category.toUpperCase()}</h2>
         <div className="grid">
           {this.state.products.map((product) => {
-            return <Cards key={product.id} product={product} currentCurrency={this.props.currentCurrency} />;
+            return (
+              <Cards
+                key={product.id}
+                product={product}
+                currentCurrency={this.props.currentCurrency}
+              />
+            );
           })}
         </div>
       </div>
-    )
+    );
   }
 }

@@ -13,12 +13,22 @@ export default class Products extends Component {
     };
   }
 
-  handleButtonClickColor = (id) => {
-    if (this.props.color.includes(id)) {
-      this.props.setColor(this.props.color.filter((item) => item !== id));
-    } else {
-      this.props.setColor(id);
-    }
+  handleClick = (id) => {
+    this.setState((prevState) => ({
+      product: {
+        ...prevState.product,
+        selectedAttributes: id,
+      },
+    }));
+  };
+
+  handleClickColor = (id) => {
+    this.setState((prevState) => ({
+      product: {
+        ...prevState.product,
+        selectedColor: id,
+      },
+    }));
   };
 
   getProduct = (id) => {
@@ -77,12 +87,13 @@ export default class Products extends Component {
     let id = window.location.pathname.slice(9, window.location.pathname.length);
     this.getProduct(id);
 
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       product: {
         ...prevState.product,
-        selectedAttributes: [],
-      }
-    }))
+        selectedAttributes: "",
+        selectedColor: "",
+      },
+    }));
   }
 
   render() {
@@ -122,7 +133,15 @@ export default class Products extends Component {
                     </h4>
                     {attribute.items.map((item, index) => {
                       return (
-                        <button className="size-btn" key={index}>
+                        <button
+                          className={
+                            this.state.product.selectedAttributes === item.id
+                              ? "size-btn active"
+                              : "size-btn"
+                          }
+                          key={index}
+                          onClick={() => this.handleClick(item.id)}
+                        >
                           {item.value}
                         </button>
                       );
@@ -143,9 +162,9 @@ export default class Products extends Component {
                       {attribute.items.map((item, index) => {
                         return (
                           <div
-                            onClick={() => this.handleButtonClickColor(item.id)}
+                            onClick={() => this.handleClickColor(item.id)}
                             className={
-                              this.props.color.includes(item.id)
+                              this.state.product.selectedColor === item.id
                                 ? "boxes-div active-color"
                                 : "boxes-div"
                             }
@@ -174,7 +193,7 @@ export default class Products extends Component {
               }
             })}
 
-            {this.state.product.inStock ? (
+            {this.state.product.inStock && (this.state.product.selectedAttributes || this.state.product.selectedColor) ? (
               <button
                 className="cart-btn"
                 onClick={() => this.props.handleAddToCart(this.state.product)}
